@@ -1,5 +1,5 @@
 use cosmwasm_schema::write_api;
-use terra_reflect::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
+use mintcash_reflect::msg::{ExecuteMsg, InstantiateMsg, QueryMsg};
 
 fn main() {
     write_api! {

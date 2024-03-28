@@ -2,16 +2,16 @@ mod msg;
 mod query;
 mod querier;
 
-pub use msg::TerraMsg;
-pub use querier::TerraQuerier;
+pub use msg::MintcashMsg;
+pub use querier::MintcashQuerier;
 #[cfg(feature = "stargate")]
-pub use querier::TerraStargateQuerier;
+pub use querier::MintcashStargateQuerier;
 pub use query::{
     ExchangeRateItem, ExchangeRatesResponse, SwapResponse, TaxCapResponse,
-    TaxRateResponse, TerraQuery
+    TaxRateResponse, MintcashQuery
 };
 
 // This export is added to all contracts that import this package, signifying that they require
-// "terra" support on the chain they run on.
+// "mintcash" support on the chain they run on.
 #[no_mangle]
-extern "C" fn requires_terra() {}
+extern "C" fn requires_mintcash() {}

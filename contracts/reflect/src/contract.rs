@@ -2,7 +2,7 @@ use cosmwasm_std::{
     entry_point, to_json_binary, to_json_vec, ContractResult, CosmosMsg, Deps, DepsMut, Env, MessageInfo,
     QueryRequest, QueryResponse, Reply, Response, StdError, StdResult, SubMsg, SystemResult,
 };
-use classic_bindings::{TerraMsg, TerraQuery};
+use mintcash_bindings::{MintcashMsg, MintcashQuery};
 
 use crate::errors::ReflectError;
 use crate::msg::{ChainResponse, ExecuteMsg, InstantiateMsg, OwnerResponse, QueryMsg};
@@ -10,11 +10,11 @@ use crate::state::{config, config_read, replies, replies_read, State};
 
 #[entry_point]
 pub fn instantiate(
-    deps: DepsMut<TerraQuery>,
+    deps: DepsMut<MintcashQuery>,
     _env: Env,
     info: MessageInfo,
     _msg: InstantiateMsg,
-) -> StdResult<Response<TerraMsg>> {
+) -> StdResult<Response<MintcashMsg>> {
     let state = State { owner: info.sender };
     config(deps.storage).save(&state)?;
     Ok(Response::default())
@@ -22,11 +22,11 @@ pub fn instantiate(
 
 #[entry_point]
 pub fn execute(
-    deps: DepsMut<TerraQuery>,
+    deps: DepsMut<MintcashQuery>,
     env: Env,
     info: MessageInfo,
     msg: ExecuteMsg,
-) -> Result<Response<TerraMsg>, ReflectError> {
+) -> Result<Response<MintcashMsg>, ReflectError> {
     match msg {
         ExecuteMsg::ReflectMsg { msgs } => execute_reflect(deps, env, info, msgs),
         ExecuteMsg::ReflectSubMsg { msgs } => execute_reflect_subcall(deps, env, info, msgs),
@@ -35,11 +35,11 @@ pub fn execute(
 }
 
 pub fn execute_reflect(
-    deps: DepsMut<TerraQuery>,
+    deps: DepsMut<MintcashQuery>,
     _env: Env,
     info: MessageInfo,
-    msgs: Vec<CosmosMsg<TerraMsg>>,
-) -> Result<Response<TerraMsg>, ReflectError> {
+    msgs: Vec<CosmosMsg<MintcashMsg>>,
+) -> Result<Response<MintcashMsg>, ReflectError> {
     let state = config(deps.storage).load()?;
 
     if info.sender != state.owner {
@@ -59,11 +59,11 @@ pub fn execute_reflect(
 }
 
 pub fn execute_reflect_subcall(
-    deps: DepsMut<TerraQuery>,
+    deps: DepsMut<MintcashQuery>,
     _env: Env,
     info: MessageInfo,
-    msgs: Vec<SubMsg<TerraMsg>>,
-) -> Result<Response<TerraMsg>, ReflectError> {
+    msgs: Vec<SubMsg<MintcashMsg>>,
+) -> Result<Response<MintcashMsg>, ReflectError> {
     let state = config(deps.storage).load()?;
     if info.sender != state.owner {
         return Err(ReflectError::NotCurrentOwner {
@@ -82,11 +82,11 @@ pub fn execute_reflect_subcall(
 }
 
 pub fn execute_change_owner(
-    deps: DepsMut<TerraQuery>,
+    deps: DepsMut<MintcashQuery>,
     _env: Env,
     info: MessageInfo,
     new_owner: String,
-) -> Result<Response<TerraMsg>, ReflectError> {
+) -> Result<Response<MintcashMsg>, ReflectError> {
     let api = deps.api;
     config(deps.storage).update(|mut state| {
         if info.sender != state.owner {
@@ -105,14 +105,14 @@ pub fn execute_change_owner(
 
 /// This just stores the result for future query
 #[entry_point]
-pub fn reply(deps: DepsMut<TerraQuery>, _env: Env, msg: Reply) -> Result<Response, ReflectError> {
+pub fn reply(deps: DepsMut<MintcashQuery>, _env: Env, msg: Reply) -> Result<Response, ReflectError> {
     let key = msg.id.to_be_bytes();
     replies(deps.storage).save(&key, &msg)?;
     Ok(Response::default())
 }
 
 #[entry_point]
-pub fn query(deps: Deps<TerraQuery>, _env: Env, msg: QueryMsg) -> StdResult<QueryResponse> {
+pub fn query(deps: Deps<MintcashQuery>, _env: Env, msg: QueryMsg) -> StdResult<QueryResponse> {
     match msg {
         QueryMsg::Owner {} => to_json_binary(&query_owner(deps)?),
         QueryMsg::Chain { request } => to_json_binary(&query_chain(deps, &request)?),
@@ -120,7 +120,7 @@ pub fn query(deps: Deps<TerraQuery>, _env: Env, msg: QueryMsg) -> StdResult<Quer
     }
 }
 
-fn query_owner(deps: Deps<TerraQuery>) -> StdResult<OwnerResponse> {
+fn query_owner(deps: Deps<MintcashQuery>) -> StdResult<OwnerResponse> {
     let state = config_read(deps.storage).load()?;
     let resp = OwnerResponse {
         owner: state.owner.into(),
@@ -128,14 +128,14 @@ fn query_owner(deps: Deps<TerraQuery>) -> StdResult<OwnerResponse> {
     Ok(resp)
 }
 
-fn query_subcall(deps: Deps<TerraQuery>, id: u64) -> StdResult<Reply> {
+fn query_subcall(deps: Deps<MintcashQuery>, id: u64) -> StdResult<Reply> {
     let key = id.to_be_bytes();
     replies_read(deps.storage).load(&key)
 }
 
 fn query_chain(
-    deps: Deps<TerraQuery>,
-    request: &QueryRequest<TerraQuery>,
+    deps: Deps<MintcashQuery>,
+    request: &QueryRequest<MintcashQuery>,
 ) -> StdResult<ChainResponse> {
     let raw = to_json_vec(request).map_err(|serialize_err| {
         StdError::generic_err(format!("Serializing QueryRequest: {}", serialize_err))
@@ -168,8 +168,8 @@ mod tests {
 
     pub fn mock_dependencies(
         contract_balance: &[Coin],
-    ) -> OwnedDeps<MockStorage, MockApi, MockQuerier<TerraQuery>, TerraQuery> {
-        let custom_querier: MockQuerier<TerraQuery> =
+    ) -> OwnedDeps<MockStorage, MockApi, MockQuerier<MintcashQuery>, MintcashQuery> {
+        let custom_querier: MockQuerier<MintcashQuery> =
             MockQuerier::new(&[(MOCK_CONTRACT_ADDR, contract_balance)]).with_custom_handler(|_| {
                 SystemResult::Err(SystemError::InvalidRequest {
                     error: "not implemented".to_string(),
@@ -377,7 +377,7 @@ mod tests {
         // TODO? or better in multitest?
         // // with custom query
         // let msg = QueryMsg::Chain {
-        //     request: TerraQuery::Ping {}.into(),
+        //     request: MintcashQuery::Ping {}.into(),
         // };
         // let response = query(deps.as_ref(), mock_env(), msg).unwrap();
         // let outer: ChainResponse = from_json(&response).unwrap();

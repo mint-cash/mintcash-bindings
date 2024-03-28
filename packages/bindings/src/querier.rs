@@ -5,17 +5,17 @@ use classic_rust::types::terra::{market::v1beta1::QuerySwapRequest, treasury::v1
 use cosmwasm_std::{Coin, QuerierWrapper, QueryRequest, StdResult, ContractInfoResponse, Uint128, Decimal};
 
 use crate::{query::{
-    SwapResponse, TaxRateResponse, TaxCapResponse, ExchangeRatesResponse, TerraQuery,
+    SwapResponse, TaxRateResponse, TaxCapResponse, ExchangeRatesResponse, MintcashQuery,
 }, ExchangeRateItem};
 
 /// This is a helper wrapper to easily use our custom queries
-pub struct TerraQuerier<'a> {
-    querier: &'a QuerierWrapper<'a, TerraQuery>,
+pub struct MintcashQuerier<'a> {
+    querier: &'a QuerierWrapper<'a, MintcashQuery>,
 }
 
-impl<'a> TerraQuerier<'a> {
-    pub fn new(querier: &'a QuerierWrapper<TerraQuery>) -> Self {
-        TerraQuerier { querier }
+impl<'a> MintcashQuerier<'a> {
+    pub fn new(querier: &'a QuerierWrapper<MintcashQuery>) -> Self {
+        MintcashQuerier { querier }
     }
 
     pub fn query_swap<T: Into<String>>(
@@ -23,28 +23,28 @@ impl<'a> TerraQuerier<'a> {
         offer_coin: Coin,
         ask_denom: T,
     ) -> StdResult<SwapResponse> {
-        let request = TerraQuery::Swap {
+        let request = MintcashQuery::Swap {
             offer_coin,
             ask_denom: ask_denom.into(),
         };
 
-        let request: QueryRequest<TerraQuery> = TerraQuery::into(request);
+        let request: QueryRequest<MintcashQuery> = MintcashQuery::into(request);
         self.querier.query(&request)
     }
 
     pub fn query_tax_cap<T: Into<String>>(&self, denom: T) -> StdResult<TaxCapResponse> {
-        let request = TerraQuery::TaxCap {
+        let request = MintcashQuery::TaxCap {
             denom: denom.into(),
         };
 
-        let request: QueryRequest<TerraQuery> = TerraQuery::into(request);
+        let request: QueryRequest<MintcashQuery> = MintcashQuery::into(request);
         self.querier.query(&request)
     }
 
     pub fn query_tax_rate(&self) -> StdResult<TaxRateResponse> {
-        let request = TerraQuery::TaxRate {};
+        let request = MintcashQuery::TaxRate {};
 
-        let request: QueryRequest<TerraQuery> = TerraQuery::into(request);
+        let request: QueryRequest<MintcashQuery> = MintcashQuery::into(request);
         self.querier.query(&request)
     }
 
@@ -53,12 +53,12 @@ impl<'a> TerraQuerier<'a> {
         base_denom: T,
         quote_denoms: Vec<T>,
     ) -> StdResult<ExchangeRatesResponse> {
-        let request = TerraQuery::ExchangeRates {
+        let request = MintcashQuery::ExchangeRates {
             base_denom: base_denom.into(),
             quote_denoms: quote_denoms.into_iter().map(|x| x.into()).collect(),
         };
 
-        let request: QueryRequest<TerraQuery> = TerraQuery::into(request);
+        let request: QueryRequest<MintcashQuery> = MintcashQuery::into(request);
         self.querier.query(&request)
     }
 
@@ -73,14 +73,14 @@ impl<'a> TerraQuerier<'a> {
 
 #[cfg(feature = "stargate")]
 /// This is a helper wrapper to easily use our custom queries through stargate query
-pub struct TerraStargateQuerier<'a> {
+pub struct MintcashStargateQuerier<'a> {
     querier: &'a QuerierWrapper<'a>,
 }
 
 #[cfg(feature = "stargate")]
-impl<'a> TerraStargateQuerier<'a> {
+impl<'a> MintcashStargateQuerier<'a> {
     pub fn new(querier: &'a QuerierWrapper) -> Self {
-        TerraStargateQuerier { querier }
+        MintcashStargateQuerier { querier }
     }
 
     pub fn query_swap<T: Into<String>>(

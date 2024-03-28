@@ -1,7 +1,7 @@
 [package]
-name = "terra-reflect"
+name = "mintcash-reflect"
 version = "0.1.0"
-authors = ["nghuyenthevinh2000 <nghuyenthevinh@gmail.com>"]
+authors = ["Unorthodox Labs, LLC"]
 edition = "2021"
 description = "Reflect messages to use for test cases - based on cw-mask"
 license = "Apache-2.0"
@@ -20,7 +20,7 @@ backtraces = ["cosmwasm-std/backtraces"]
 cosmwasm-schema = "1.5"
 cosmwasm-std = { version = "1.5", features = ["staking", "stargate"] }
 cosmwasm-storage = "1.5"
-classic-bindings = { version = "0.2.1", path = "../../packages/bindings" }
+mintcash-bindings = { version = "0.1.0", path = "../../packages/bindings" }
 schemars = "0.8"
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 thiserror = "1.0"

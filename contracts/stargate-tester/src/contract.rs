@@ -1,4 +1,4 @@
-use classic_bindings::{TerraQuery, TerraStargateQuerier};
+use mintcash_bindings::{MintcashQuery, MintcashStargateQuerier};
 #[cfg(not(feature = "library"))]
 use cosmwasm_std::entry_point;
 use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult, to_json_binary};
@@ -34,14 +34,14 @@ pub fn execute(
 }
 
 #[cfg_attr(not(feature = "library"), entry_point)]
-pub fn query(deps: Deps, _env: Env, msg: TerraQuery) -> StdResult<Binary> {
-    let querier = TerraStargateQuerier::new(&deps.querier);
+pub fn query(deps: Deps, _env: Env, msg: MintcashQuery) -> StdResult<Binary> {
+    let querier = MintcashStargateQuerier::new(&deps.querier);
 
     match msg {
-        TerraQuery::Swap { offer_coin, ask_denom } => to_json_binary(&querier.query_swap(offer_coin, ask_denom)?),
-        TerraQuery::TaxCap { denom } => to_json_binary(&querier.query_tax_cap(denom)?),
-        TerraQuery::TaxRate { } => to_json_binary(&querier.query_tax_rate()?),
-        TerraQuery::ExchangeRates { base_denom, quote_denoms } => to_json_binary(&querier.query_exchange_rates(base_denom, quote_denoms)?),
+        MintcashQuery::Swap { offer_coin, ask_denom } => to_json_binary(&querier.query_swap(offer_coin, ask_denom)?),
+        MintcashQuery::TaxCap { denom } => to_json_binary(&querier.query_tax_cap(denom)?),
+        MintcashQuery::TaxRate { } => to_json_binary(&querier.query_tax_rate()?),
+        MintcashQuery::ExchangeRates { base_denom, quote_denoms } => to_json_binary(&querier.query_exchange_rates(base_denom, quote_denoms)?),
     }
 }
 

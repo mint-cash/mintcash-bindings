@@ -1,9 +1,9 @@
 use cosmwasm_schema::cw_serde;
 use cosmwasm_std::{Coin, CosmosMsg, CustomMsg};
 
-/// A number of Custom messages that can call into the Terra bindings
+/// A number of Custom messages that can call into the Mint Cash bindings
 #[cw_serde]
-pub enum TerraMsg {
+pub enum MintcashMsg {
     // swap
     Swap {
         offer_coin: Coin,
@@ -17,11 +17,11 @@ pub enum TerraMsg {
     }
 }
 
-impl TerraMsg {
+impl MintcashMsg {
 
     // create swap msg
     pub fn create_swap_msg(offer_coin: Coin, ask_denom: String) -> Self {
-        TerraMsg::Swap {
+        MintcashMsg::Swap {
             offer_coin,
             ask_denom,
         }
@@ -29,7 +29,7 @@ impl TerraMsg {
 
     // create swap send msg
     pub fn create_swap_send_msg(to_address: String, offer_coin: Coin, ask_denom: String) -> Self {
-        TerraMsg::SwapSend {
+        MintcashMsg::SwapSend {
             to_address,
             offer_coin,
             ask_denom,
@@ -37,10 +37,10 @@ impl TerraMsg {
     }
 }
 
-impl From<TerraMsg> for CosmosMsg<TerraMsg> {
-    fn from(msg: TerraMsg) -> CosmosMsg<TerraMsg> {
+impl From<MintcashMsg> for CosmosMsg<MintcashMsg> {
+    fn from(msg: MintcashMsg) -> CosmosMsg<MintcashMsg> {
         CosmosMsg::Custom(msg)
     }
 }
 
-impl CustomMsg for TerraMsg {}
+impl CustomMsg for MintcashMsg {}

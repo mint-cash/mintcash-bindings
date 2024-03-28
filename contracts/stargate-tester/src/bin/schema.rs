@@ -1,12 +1,12 @@
 use cosmwasm_schema::write_api;
 
 use stargate_tester::msg::{ExecuteMsg, InstantiateMsg};
-use classic_bindings::TerraQuery;
+use mintcash_bindings::MintcashQuery;
 
 fn main() {
     write_api! {
         instantiate: InstantiateMsg,
         execute: ExecuteMsg,
-        query: TerraQuery,
+        query: MintcashQuery,
     }
 }

@@ -278,8 +278,8 @@ fn output_version_file(project_name: &str, versions: &str, out_dir: &Path) {
 }
 
 fn find_cargo_toml(path: &Path) -> PathBuf {
-    if path.join("Cargo.toml").exists() {
-        path.to_path_buf().join("Cargo.toml")
+    if path.join("../../Cargo.toml").exists() {
+        path.to_path_buf().join("../../Cargo.toml")
     } else {
         find_cargo_toml(path.parent().expect("Cargo.toml not found"))
     }

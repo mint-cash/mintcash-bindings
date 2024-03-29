@@ -28,13 +28,13 @@ const COMETBFT_REV: &str = "v0.34.29-terra.0";
 /// The directory generated cosmos-sdk proto files go into in this repo
 const OUT_DIR: &str = "../proto/src/types";
 /// Directory where the cosmos-sdk submodule is located
-const COSMOS_SDK_DIR: &str = "../deps/cosmos-sdk";
+const COSMOS_SDK_DIR: &str = "../../deps/cosmos-sdk";
 /// Directory where the classic submodule is located
-const CLASSIC_DIR: &str = "../deps/classic";
+const CLASSIC_DIR: &str = "../../deps/classic";
 /// Directory where the wasmd submodule is located
-const WASMD_DIR: &str = "../deps/wasmd";
+const WASMD_DIR: &str = "../../deps/wasmd";
 /// Directory where the cometbft submodule is located
-const COMETBFT_DIR: &str = "../deps/cometbft";
+const COMETBFT_DIR: &str = "../../deps/cometbft";
 
 /// A temporary directory for proto building
 const TMP_BUILD_DIR: &str = "/tmp/tmp-protobuf/";

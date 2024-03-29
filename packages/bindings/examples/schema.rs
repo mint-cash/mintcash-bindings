@@ -3,9 +3,9 @@ use std::fs::create_dir_all;
 
 use cosmwasm_schema::{export_schema, remove_schemas, schema_for};
 
-use classic_bindings::{
-    ExchangeRateItem, ExchangeRatesResponse, SwapResponse, TaxCapResponse,
-    TaxRateResponse, TerraQuery, TerraMsg
+use mintcash_bindings::{
+    ExchangeRateItem, ExchangeRatesResponse, MintcashMsg, MintcashQuery, SwapResponse,
+    TaxCapResponse, TaxRateResponse,
 };
 
 fn main() {
@@ -14,8 +14,8 @@ fn main() {
     create_dir_all(&out_dir).unwrap();
     remove_schemas(&out_dir).unwrap();
 
-    export_schema(&schema_for!(TerraMsg), &out_dir);
-    export_schema(&schema_for!(TerraQuery), &out_dir);
+    export_schema(&schema_for!(MintcashMsg), &out_dir);
+    export_schema(&schema_for!(MintcashQuery), &out_dir);
     export_schema(&schema_for!(ExchangeRateItem), &out_dir);
     export_schema(&schema_for!(ExchangeRatesResponse), &out_dir);
     export_schema(&schema_for!(TaxCapResponse), &out_dir);

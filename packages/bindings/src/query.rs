@@ -1,23 +1,18 @@
 use cosmwasm_schema::{cw_serde, QueryResponses};
 use cosmwasm_std::{Coin, CustomQuery, Decimal, Uint128};
 
-impl CustomQuery for TerraQuery {}
+impl CustomQuery for MintcashQuery {}
 
-// TerraQuery for custom bindings
+// MintcashQuery for custom bindings
 #[cw_serde]
 #[derive(QueryResponses)]
-pub enum TerraQuery {
+pub enum MintcashQuery {
     #[returns(SwapResponse)]
-    Swap {
-        offer_coin: Coin,
-        ask_denom: String,
-    },
+    Swap { offer_coin: Coin, ask_denom: String },
     #[returns(TaxRateResponse)]
     TaxRate {},
     #[returns(TaxCapResponse)]
-    TaxCap {
-        denom: String,
-    },
+    TaxCap { denom: String },
     #[returns(ExchangeRatesResponse)]
     ExchangeRates {
         base_denom: String,
@@ -25,24 +20,24 @@ pub enum TerraQuery {
     },
 }
 
-impl TerraQuery {
+impl MintcashQuery {
     pub fn swap(offer_coin: Coin, ask_denom: String) -> Self {
-        TerraQuery::Swap {
+        MintcashQuery::Swap {
             offer_coin,
             ask_denom,
         }
     }
 
     pub fn tax_rate() -> Self {
-        TerraQuery::TaxRate {}
+        MintcashQuery::TaxRate {}
     }
 
     pub fn tax_cap(denom: String) -> Self {
-        TerraQuery::TaxCap { denom }
+        MintcashQuery::TaxCap { denom }
     }
 
     pub fn exchange_rates(base_denom: String, quote_denoms: Vec<String>) -> Self {
-        TerraQuery::ExchangeRates {
+        MintcashQuery::ExchangeRates {
             base_denom,
             quote_denoms,
         }

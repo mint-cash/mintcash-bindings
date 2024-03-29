@@ -1,10 +1,10 @@
 [package]
-name = "classic-bindings"
-version = "0.2.1"
-authors = ["nghuyenthevinh2000 <nghuyenthevinh@gmail.com>"]
+name = "mintcash-bindings"
+version = "0.1.0"
+authors = ["Unorthodox Labs, LLC"]
 edition = "2021"
-description = "Bindings for CustomMsg and CustomQuery for the Terra Classic blockchain"
-repository = "https://github.com/classic-terra/terra-bindings"
+description = "Bindings for CustomMsg and CustomQuery for the Mint Cash blockchain"
+repository = "https://github.com/mint-cash/mintcash-bindings"
 license = "Apache-2.0"
 readme = "README.md"
 
@@ -24,4 +24,4 @@ cosmwasm-std = { version = "1.5", features = ["stargate"] }
 schemars = "0.8"
 serde = { version = "1.0", default-features = false, features = ["derive"] }
 prost = "0.11"
-classic-rust = "0.2.0"
+mintcash-rust = { path = "../mintcash-rust" }

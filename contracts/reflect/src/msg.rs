@@ -1,15 +1,15 @@
 use cosmwasm_schema::{cw_serde, QueryResponses};
 use cosmwasm_std::{Binary, CosmosMsg, QueryRequest, SubMsg};
 
-use classic_bindings::{TerraMsg, TerraQuery};
+use mintcash_bindings::{MintcashMsg, MintcashQuery};
 
 #[cw_serde]
 pub struct InstantiateMsg {}
 
 #[cw_serde]
 pub enum ExecuteMsg {
-    ReflectMsg { msgs: Vec<CosmosMsg<TerraMsg>> },
-    ReflectSubMsg { msgs: Vec<SubMsg<TerraMsg>> },
+    ReflectMsg { msgs: Vec<CosmosMsg<MintcashMsg>> },
+    ReflectSubMsg { msgs: Vec<SubMsg<MintcashMsg>> },
     ChangeOwner { owner: String },
 }
 
@@ -20,7 +20,9 @@ pub enum QueryMsg {
     Owner {},
     /// Queries the blockchain and returns the result untouched
     #[returns(ChainResponse)]
-    Chain { request: QueryRequest<TerraQuery> },
+    Chain {
+        request: QueryRequest<MintcashQuery>,
+    },
     /// If there was a previous ReflectSubMsg with this ID, returns cosmwasm_std::Reply
     #[returns(cosmwasm_std::Reply)]
     SubMsgResult { id: u64 },

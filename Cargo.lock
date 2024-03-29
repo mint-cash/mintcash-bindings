@@ -260,43 +260,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "classic-rust"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1d86286dfe6e1a77f005cbf0d32eaa93e173adba1ec67cd3e6d007ac56b94d17"
-dependencies = [
- "chrono",
- "cosmwasm-std",
- "osmosis-std-derive",
- "prost 0.11.9",
- "prost-types 0.11.9",
- "schemars",
- "serde",
- "serde-cw-value",
-]
-
-[[package]]
-name = "classic-rust-generator"
-version = "0.1.0"
-dependencies = [
- "heck",
- "itertools",
- "log",
- "pretty_env_logger",
- "prettyplease",
- "proc-macro2",
- "prost 0.10.4",
- "prost-build",
- "prost-types 0.10.1",
- "quote",
- "regex",
- "syn 1.0.109",
- "tonic",
- "tonic-build",
- "walkdir",
-]
-
-[[package]]
 name = "cmake"
 version = "0.1.50"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -939,9 +902,9 @@ dependencies = [
 name = "mintcash-bindings"
 version = "0.1.0"
 dependencies = [
- "classic-rust",
  "cosmwasm-schema",
  "cosmwasm-std",
+ "mintcash-rust",
  "prost 0.11.9",
  "schemars",
  "serde",
@@ -972,6 +935,27 @@ dependencies = [
  "schemars",
  "serde",
  "serde-cw-value",
+]
+
+[[package]]
+name = "mintcash-rust-generator"
+version = "0.1.0"
+dependencies = [
+ "heck",
+ "itertools",
+ "log",
+ "pretty_env_logger",
+ "prettyplease",
+ "proc-macro2",
+ "prost 0.10.4",
+ "prost-build",
+ "prost-types 0.10.1",
+ "quote",
+ "regex",
+ "syn 1.0.109",
+ "tonic",
+ "tonic-build",
+ "walkdir",
 ]
 
 [[package]]

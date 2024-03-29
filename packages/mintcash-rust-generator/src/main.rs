@@ -5,7 +5,7 @@
 
 use std::{env, path::PathBuf};
 
-use classic_rust_generator::{
+use mintcash_rust_generator::{
     code_generator::{CodeGenerator, CosmosProject},
     git,
 };

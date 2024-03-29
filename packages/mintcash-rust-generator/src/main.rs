@@ -95,14 +95,14 @@ pub fn generate() {
         ],
     };
 
-    let classic_code_generator = CodeGenerator::new(
+    let mintcash_code_generator = CodeGenerator::new(
         out_dir,
         tmp_build_dir,
         mintcash_project,
         vec![cometbft_project, cosmos_project, wasmd_project],
     );
 
-    classic_code_generator.generate();
+    mintcash_code_generator.generate();
 }
 
 fn main() {

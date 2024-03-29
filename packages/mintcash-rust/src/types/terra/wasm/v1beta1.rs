@@ -11,7 +11,7 @@ use osmosis_std_derive::CosmwasmExt;
     ::schemars::JsonSchema,
     CosmwasmExt,
 )]
-#[proto_message(type_url = "/terra.wasm.v1beta1.CodeInfo")]
+#[proto_message(type_url = "/mintcash.wasm.v1beta1.CodeInfo")]
 pub struct CodeInfo {
     /// CodeID is the sequentially increasing unique identifier
     #[prost(uint64, tag = "1")]
@@ -35,7 +35,7 @@ pub struct CodeInfo {
     ::schemars::JsonSchema,
     CosmwasmExt,
 )]
-#[proto_message(type_url = "/terra.wasm.v1beta1.ContractInfo")]
+#[proto_message(type_url = "/mintcash.wasm.v1beta1.ContractInfo")]
 pub struct ContractInfo {
     /// Address is the address of the contract
     #[prost(string, tag = "1")]

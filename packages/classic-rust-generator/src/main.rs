@@ -26,7 +26,7 @@ const COMETBFT_REV: &str = "v0.34.29-terra.0";
 // working directory.
 
 /// The directory generated cosmos-sdk proto files go into in this repo
-const OUT_DIR: &str = "../proto/src/types";
+const OUT_DIR: &str = "../mintcash-rust/src/types";
 /// Directory where the cosmos-sdk submodule is located
 const COSMOS_SDK_DIR: &str = "../../deps/cosmos-sdk";
 /// Directory where the classic submodule is located

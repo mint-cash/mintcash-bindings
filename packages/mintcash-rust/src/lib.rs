@@ -4,7 +4,7 @@
 #![warn(trivial_casts, trivial_numeric_casts, unused_import_braces)]
 
 /// The version (commit hash) of the Cosmos SDK used when generating this library.
-pub const CLASSIC_VERSION: &str = include_str!("types/TERRA_COMMIT");
+pub const MINTCASH_VERSION: &str = include_str!("types/MINTCASH_COMMIT");
 
 pub const TREASURY_MODULE: &str = "treasury";
 pub const ORACLE_MODULE: &str = "oracle";

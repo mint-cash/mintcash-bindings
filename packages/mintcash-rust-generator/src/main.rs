@@ -14,7 +14,7 @@ use mintcash_rust_generator::{
 const COSMOS_SDK_REV: &str = "v0.46.14-terra.4";
 
 /// The classic commit or tag to be cloned and used to build the proto files
-const CLASSIC_REV: &str = "v2.3.2";
+const MINTCASH_REV: &str = "main";
 
 /// The wasmd commit or tag to be cloned and used to build the proto files
 const WASMD_REV: &str = "v0.30.0-terra.3";
@@ -30,7 +30,7 @@ const OUT_DIR: &str = "../mintcash-rust/src/types";
 /// Directory where the cosmos-sdk submodule is located
 const COSMOS_SDK_DIR: &str = "../../deps/cosmos-sdk";
 /// Directory where the classic submodule is located
-const CLASSIC_DIR: &str = "../../deps/classic";
+const MINTCASH_DIR: &str = "../../deps/mintcash";
 /// Directory where the wasmd submodule is located
 const WASMD_DIR: &str = "../../deps/wasmd";
 /// Directory where the cometbft submodule is located
@@ -43,17 +43,17 @@ pub fn generate() {
     let args: Vec<String> = env::args().collect();
     if args.iter().any(|arg| arg == "--update-deps") {
         git::update_submodule(COSMOS_SDK_DIR, COSMOS_SDK_REV);
-        git::update_submodule(CLASSIC_DIR, CLASSIC_REV);
+        git::update_submodule(MINTCASH_DIR, MINTCASH_REV);
         git::update_submodule(WASMD_DIR, WASMD_REV);
     }
 
     let tmp_build_dir: PathBuf = TMP_BUILD_DIR.parse().unwrap();
     let out_dir: PathBuf = OUT_DIR.parse().unwrap();
 
-    let classic_project = CosmosProject {
-        name: "terra".to_string(),
-        version: CLASSIC_REV.to_string(),
-        project_dir: CLASSIC_DIR.to_string(),
+    let mintcash_project = CosmosProject {
+        name: "mintcash".to_string(),
+        version: MINTCASH_REV.to_string(),
+        project_dir: MINTCASH_DIR.to_string(),
         include_mods: vec![
             "market".to_string(),
             "oracle".to_string(),
@@ -98,7 +98,7 @@ pub fn generate() {
     let classic_code_generator = CodeGenerator::new(
         out_dir,
         tmp_build_dir,
-        classic_project,
+        mintcash_project,
         vec![cometbft_project, cosmos_project, wasmd_project],
     );
 

@@ -4,9 +4,9 @@
 [submodule "deps/wasmd"]
 	path = deps/wasmd
 	url = https://github.com/classic-terra/wasmd.git
-[submodule "deps/classic"]
-	path = deps/classic
-	url = https://github.com/classic-terra/core.git
 [submodule "deps/cometbft"]
 	path = deps/cometbft
 	url = https://github.com/classic-terra/cometbft.git
+[submodule "deps/mintcash"]
+	path = deps/mintcash
+	url = https://github.com/mint-cash/mintcash.git

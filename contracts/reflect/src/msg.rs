@@ -20,7 +20,9 @@ pub enum QueryMsg {
     Owner {},
     /// Queries the blockchain and returns the result untouched
     #[returns(ChainResponse)]
-    Chain { request: QueryRequest<MintcashQuery> },
+    Chain {
+        request: QueryRequest<MintcashQuery>,
+    },
     /// If there was a previous ReflectSubMsg with this ID, returns cosmwasm_std::Reply
     #[returns(cosmwasm_std::Reply)]
     SubMsgResult { id: u64 },

@@ -57,7 +57,7 @@ pub fn generate() {
         include_mods: vec![
             "market".to_string(),
             "oracle".to_string(),
-            "treasury".to_string()
+            "treasury".to_string(),
         ],
     };
     let wasmd_project = CosmosProject {
@@ -80,7 +80,7 @@ pub fn generate() {
             "staking/v1beta1/genesis.proto".to_string(),
             "staking/v1beta1/staking.proto".to_string(),
             "staking/v1beta1/tx.proto".to_string(),
-            "base/abci/v1beta1/abci.proto".to_string()
+            "base/abci/v1beta1/abci.proto".to_string(),
         ],
     };
     let cometbft_project = CosmosProject {

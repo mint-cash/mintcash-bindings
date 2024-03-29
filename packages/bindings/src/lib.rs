@@ -1,14 +1,14 @@
 mod msg;
-mod query;
 mod querier;
+mod query;
 
 pub use msg::MintcashMsg;
 pub use querier::MintcashQuerier;
 #[cfg(feature = "stargate")]
 pub use querier::MintcashStargateQuerier;
 pub use query::{
-    ExchangeRateItem, ExchangeRatesResponse, SwapResponse, TaxCapResponse,
-    TaxRateResponse, MintcashQuery
+    ExchangeRateItem, ExchangeRatesResponse, MintcashQuery, SwapResponse, TaxCapResponse,
+    TaxRateResponse,
 };
 
 // This export is added to all contracts that import this package, signifying that they require

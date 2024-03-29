@@ -1,7 +1,7 @@
-use mintcash_bindings::{MintcashQuery, MintcashStargateQuerier};
 #[cfg(not(feature = "library"))]
 use cosmwasm_std::entry_point;
-use cosmwasm_std::{Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult, to_json_binary};
+use cosmwasm_std::{to_json_binary, Binary, Deps, DepsMut, Env, MessageInfo, Response, StdResult};
+use mintcash_bindings::{MintcashQuery, MintcashStargateQuerier};
 // use cw2::set_contract_version;
 
 use crate::error::ContractError;
@@ -38,10 +38,16 @@ pub fn query(deps: Deps, _env: Env, msg: MintcashQuery) -> StdResult<Binary> {
     let querier = MintcashStargateQuerier::new(&deps.querier);
 
     match msg {
-        MintcashQuery::Swap { offer_coin, ask_denom } => to_json_binary(&querier.query_swap(offer_coin, ask_denom)?),
+        MintcashQuery::Swap {
+            offer_coin,
+            ask_denom,
+        } => to_json_binary(&querier.query_swap(offer_coin, ask_denom)?),
         MintcashQuery::TaxCap { denom } => to_json_binary(&querier.query_tax_cap(denom)?),
-        MintcashQuery::TaxRate { } => to_json_binary(&querier.query_tax_rate()?),
-        MintcashQuery::ExchangeRates { base_denom, quote_denoms } => to_json_binary(&querier.query_exchange_rates(base_denom, quote_denoms)?),
+        MintcashQuery::TaxRate {} => to_json_binary(&querier.query_tax_rate()?),
+        MintcashQuery::ExchangeRates {
+            base_denom,
+            quote_denoms,
+        } => to_json_binary(&querier.query_exchange_rates(base_denom, quote_denoms)?),
     }
 }
 

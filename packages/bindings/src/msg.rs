@@ -7,18 +7,17 @@ pub enum MintcashMsg {
     // swap
     Swap {
         offer_coin: Coin,
-        ask_denom: String
+        ask_denom: String,
     },
     // swap send
-    SwapSend {   
+    SwapSend {
         to_address: String,
         offer_coin: Coin,
-        ask_denom: String
-    }
+        ask_denom: String,
+    },
 }
 
 impl MintcashMsg {
-
     // create swap msg
     pub fn create_swap_msg(offer_coin: Coin, ask_denom: String) -> Self {
         MintcashMsg::Swap {

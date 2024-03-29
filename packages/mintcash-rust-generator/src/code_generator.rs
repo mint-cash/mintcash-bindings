@@ -159,12 +159,15 @@ impl CodeGenerator {
                 .filter_map(|e| e.ok())
                 .find(|e| {
                     // filter noisy buf_root paths
-                    let f = e.path()
+                    let f = e
+                        .path()
                         .to_str()
                         .map(|s| s.contains("cosmos-sdk/core"))
                         .unwrap();
-                    if f { return false}
-                    
+                    if f {
+                        return false;
+                    }
+
                     e.file_name()
                         .to_str()
                         .map(|s| s == "buf.yaml" || s == "buf.yml")

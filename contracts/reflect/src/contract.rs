@@ -1,6 +1,7 @@
 use cosmwasm_std::{
-    entry_point, to_json_binary, to_json_vec, ContractResult, CosmosMsg, Deps, DepsMut, Env, MessageInfo,
-    QueryRequest, QueryResponse, Reply, Response, StdError, StdResult, SubMsg, SystemResult,
+    entry_point, to_json_binary, to_json_vec, ContractResult, CosmosMsg, Deps, DepsMut, Env,
+    MessageInfo, QueryRequest, QueryResponse, Reply, Response, StdError, StdResult, SubMsg,
+    SystemResult,
 };
 use mintcash_bindings::{MintcashMsg, MintcashQuery};
 
@@ -105,7 +106,11 @@ pub fn execute_change_owner(
 
 /// This just stores the result for future query
 #[entry_point]
-pub fn reply(deps: DepsMut<MintcashQuery>, _env: Env, msg: Reply) -> Result<Response, ReflectError> {
+pub fn reply(
+    deps: DepsMut<MintcashQuery>,
+    _env: Env,
+    msg: Reply,
+) -> Result<Response, ReflectError> {
     let key = msg.id.to_be_bytes();
     replies(deps.storage).save(&key, &msg)?;
     Ok(Response::default())

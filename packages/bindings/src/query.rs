@@ -8,16 +8,11 @@ impl CustomQuery for MintcashQuery {}
 #[derive(QueryResponses)]
 pub enum MintcashQuery {
     #[returns(SwapResponse)]
-    Swap {
-        offer_coin: Coin,
-        ask_denom: String,
-    },
+    Swap { offer_coin: Coin, ask_denom: String },
     #[returns(TaxRateResponse)]
     TaxRate {},
     #[returns(TaxCapResponse)]
-    TaxCap {
-        denom: String,
-    },
+    TaxCap { denom: String },
     #[returns(ExchangeRatesResponse)]
     ExchangeRates {
         base_denom: String,

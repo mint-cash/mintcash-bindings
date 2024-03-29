@@ -11,16 +11,16 @@ use mintcash_rust_generator::{
 };
 
 /// The Cosmos SDK commit or tag to be cloned and used to build the proto files
-const COSMOS_SDK_REV: &str = "v0.46.14-terra.4";
+const COSMOS_SDK_REV: &str = "v0.47.2";
 
 /// The classic commit or tag to be cloned and used to build the proto files
 const MINTCASH_REV: &str = "main";
 
 /// The wasmd commit or tag to be cloned and used to build the proto files
-const WASMD_REV: &str = "v0.30.0-terra.3";
+const WASMD_REV: &str = "v0.40.0-tf.rc2";
 
 /// The cometbft commit or tag to be cloned and used to build the proto files
-const COMETBFT_REV: &str = "v0.34.29-terra.0";
+const COMETBFT_REV: &str = "v0.37.1";
 
 // All paths must end with a / and either be absolute or include a ./ to reference the current
 // working directory.

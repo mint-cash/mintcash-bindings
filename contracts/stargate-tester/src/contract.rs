@@ -48,6 +48,12 @@ pub fn query(deps: Deps, _env: Env, msg: MintcashQuery) -> StdResult<Binary> {
             base_denom,
             quote_denoms,
         } => to_json_binary(&querier.query_exchange_rates(base_denom, quote_denoms)?),
+        MintcashQuery::DenomsFromCreator { creator } => {
+            to_json_binary(&querier.query_denoms_from_creator(creator)?)
+        }
+        MintcashQuery::DenomAuthorityMetadata { denom } => {
+            to_json_binary(&querier.query_denom_authority_metadata(denom)?)
+        }
     }
 }
 

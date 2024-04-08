@@ -59,7 +59,7 @@ pub struct GenesisState {
     response_type = QuerySwapResponse
 )]
 pub struct QuerySwapRequest {
-    /// offer_coin defines the coin being offered (i.e. 1000000umint)
+    /// offer_coin defines the coin being offered (i.e. 1000000ulmint)
     #[prost(string, tag = "1")]
     pub offer_coin: ::prost::alloc::string::String,
     /// ask_denom defines the denom of the coin to swap to

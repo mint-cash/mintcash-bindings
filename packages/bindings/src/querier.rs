@@ -8,10 +8,10 @@ use mintcash_rust::types::mintcash::{
     market::v1beta1::QuerySwapRequest,
     oracle::v1beta1::QueryExchangeRateRequest,
     treasury::v1beta1::{QueryTaxCapRequest, QueryTaxRateRequest},
+    tokenfactory::v1beta1::{QueryDenomAuthorityMetadataRequest, QueryDenomsFromCreatorRequest}
 };
-
 use crate::{
-    query::{ExchangeRatesResponse, MintcashQuery, SwapResponse, TaxCapResponse, TaxRateResponse},
+    query::{MintcashQuery, ExchangeRatesResponse, SwapResponse, TaxCapResponse, TaxRateResponse, DenomAuthorityMetadataResponse, DenomsFromCreatorResponse},
     ExchangeRateItem,
 };
 
@@ -63,6 +63,30 @@ impl<'a> MintcashQuerier<'a> {
         let request = MintcashQuery::ExchangeRates {
             base_denom: base_denom.into(),
             quote_denoms: quote_denoms.into_iter().map(|x| x.into()).collect(),
+        };
+
+        let request: QueryRequest<MintcashQuery> = MintcashQuery::into(request);
+        self.querier.query(&request)
+    }
+
+    pub fn query_denoms_from_creator<T: Into<String>>(
+        &self,
+        creator: T,
+    ) -> StdResult<DenomsFromCreatorResponse> {
+        let request = MintcashQuery::DenomsFromCreator {
+            creator: creator.into(),
+        };
+
+        let request: QueryRequest<MintcashQuery> = MintcashQuery::into(request);
+        self.querier.query(&request)
+    }
+
+    pub fn query_denom_authority_metadata<T: Into<String>>(
+        &self,
+        denom: T,
+    ) -> StdResult<DenomAuthorityMetadataResponse> {
+        let request = MintcashQuery::DenomAuthorityMetadata {
+            denom: denom.into(),
         };
 
         let request: QueryRequest<MintcashQuery> = MintcashQuery::into(request);
@@ -180,5 +204,35 @@ impl<'a> MintcashStargateQuerier<'a> {
     ) -> StdResult<ContractInfoResponse> {
         self.querier
             .query_wasm_contract_info(contract_address.into())
+    }
+
+    pub fn query_denoms_from_creator<T: Into<String>>(
+        &self,
+        creator: T,
+    ) -> StdResult<DenomsFromCreatorResponse> {
+        let response = QueryDenomsFromCreatorRequest {
+            creator: creator.into(),
+        }
+        .query(self.querier)
+        .unwrap();
+
+        Ok(DenomsFromCreatorResponse {
+            denoms: response.denoms,
+        })
+    }
+
+    pub fn query_denom_authority_metadata<T: Into<String>>(
+        &self,
+        denom: T,
+    ) -> StdResult<DenomAuthorityMetadataResponse> {
+        let response = QueryDenomAuthorityMetadataRequest {
+            denom: denom.into(),
+        }
+        .query(self.querier)
+        .unwrap();
+
+        Ok(DenomAuthorityMetadataResponse {
+            authority_metadata: response.authority_metadata,
+        })
     }
 }

@@ -58,6 +58,7 @@ pub fn generate() {
             "market".to_string(),
             "oracle".to_string(),
             "treasury".to_string(),
+            "tokenfactory".to_string(),
         ],
     };
     let wasmd_project = CosmosProject {

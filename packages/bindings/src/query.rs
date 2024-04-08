@@ -1,5 +1,6 @@
 use cosmwasm_schema::{cw_serde, QueryResponses};
 use cosmwasm_std::{Coin, CustomQuery, Decimal, Uint128};
+use mintcash_rust::types::mintcash::tokenfactory::v1beta1::DenomAuthorityMetadata;
 
 impl CustomQuery for MintcashQuery {}
 
@@ -9,15 +10,24 @@ impl CustomQuery for MintcashQuery {}
 pub enum MintcashQuery {
     #[returns(SwapResponse)]
     Swap { offer_coin: Coin, ask_denom: String },
+
     #[returns(TaxRateResponse)]
     TaxRate {},
+
     #[returns(TaxCapResponse)]
     TaxCap { denom: String },
+
     #[returns(ExchangeRatesResponse)]
     ExchangeRates {
         base_denom: String,
         quote_denoms: Vec<String>,
     },
+
+    #[returns(DenomsFromCreatorResponse)]
+    DenomsFromCreator { creator: String },
+
+    #[returns(DenomAuthorityMetadataResponse)]
+    DenomAuthorityMetadata { denom: String },
 }
 
 impl MintcashQuery {
@@ -41,6 +51,14 @@ impl MintcashQuery {
             base_denom,
             quote_denoms,
         }
+    }
+
+    pub fn denoms_from_creator(creator: String) -> Self {
+        MintcashQuery::DenomsFromCreator { creator }
+    }
+
+    pub fn denom_authority_metadata(denom: String) -> Self {
+        MintcashQuery::DenomAuthorityMetadata { denom }
     }
 }
 
@@ -74,4 +92,14 @@ pub struct ExchangeRateItem {
 pub struct ExchangeRatesResponse {
     pub base_denom: String,
     pub exchange_rates: Vec<ExchangeRateItem>,
+}
+
+#[cw_serde]
+pub struct DenomsFromCreatorResponse {
+    pub denoms: Vec<String>,
+}
+
+#[cw_serde]
+pub struct DenomAuthorityMetadataResponse {
+    pub authority_metadata: Option<DenomAuthorityMetadata>
 }

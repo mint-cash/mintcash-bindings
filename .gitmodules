@@ -1,12 +1,16 @@
 [submodule "deps/mintcash"]
 	path = deps/mintcash
 	url = https://github.com/mint-cash/mintcash.git
+	update = none
 [submodule "deps/cosmos-sdk"]
 	path = deps/cosmos-sdk
 	url = https://github.com/cosmos/cosmos-sdk.git
+	update = none
 [submodule "deps/cometbft"]
 	path = deps/cometbft
 	url = https://github.com/cometbft/cometbft.git
+	update = none
 [submodule "deps/wasmd"]
 	path = deps/wasmd
 	url = https://github.com/notional-labs/wasmd.git
+	update = none

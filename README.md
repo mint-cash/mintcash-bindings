@@ -1,9 +1,19 @@
 # mintcash-bindings
 Mint Cash bindings smart contracts for CosmWasm/wasmd v1.1.0+
 
-This new package of terra bindings will bring CosmWasm/wasmd to parity with the rest of the cosmos ecosystem
+[Checkout all submodules under `deps/*`:](https://stackoverflow.com/questions/63974493/why-would-git-submodule-update-skip-a-submodule)
 
-Run this will produce wasm file
+```bash
+git submodule update --checkout
+```
+
+Generate code for `mintcash-rust`:
+
+```bash
+cargo run --bin mintcash-rust-generator
+```
+
+This will produce wasm file for `mintcash-bindings`:
 
 ```bash
 docker run --rm -v "$(pwd)":/code \

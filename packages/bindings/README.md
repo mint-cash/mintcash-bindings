@@ -1,3 +1,3 @@
-# Classic bindings
+# Mintcash bindings
 
-The bindings library for Terra Classic to interact with the chain
+The bindings library for Mintcash contract to interact with the chain

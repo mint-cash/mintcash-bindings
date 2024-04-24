@@ -25,7 +25,7 @@ pub enum MintcashMsg {
     /// The (creating contract address, subdenom) pair must be unique.
     /// The created denom's admin is the creating contract address,
     /// but this admin can be changed using the UpdateAdmin binding.
-    CreateDenom { subdenom: String },
+    CreateDenom { denom: String },
     /// ChangeAdmin changes the admin for a factory denom.
     /// Can only be called by the current contract admin.
     /// If the NewAdminAddress is empty, the denom will have no admin.

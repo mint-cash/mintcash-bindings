@@ -19,10 +19,10 @@ pub enum MintcashMsg {
     /// From https://github.com/osmosis-labs/bindings/blob/531cf7bd58d90ce4681de84556cc9bda428aec68/packages/bindings/src/msg.rs
     ///
     /// CreateDenom creates a new factory denom, of denomination:
-    /// factory/{creating contract bech32 address}/{Subdenom}
-    /// Subdenom can be of length at most 44 characters, in [0-9a-zA-Z./]
-    /// Empty subdenoms are valid.
-    /// The (creating contract address, subdenom) pair must be unique.
+    /// {Denom}
+    /// Denom can be of length at most 44 characters, in [0-9a-zA-Z./]
+    /// Empty denoms are not valid in Mintcash contract.
+    /// The (creating contract address, denom) pair must be unique.
     /// The created denom's admin is the creating contract address,
     /// but this admin can be changed using the UpdateAdmin binding.
     CreateDenom { denom: String },

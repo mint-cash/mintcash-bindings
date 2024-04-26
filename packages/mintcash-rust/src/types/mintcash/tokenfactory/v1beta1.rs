@@ -200,7 +200,7 @@ pub struct QueryDenomsFromCreatorResponse {
 /// must be unique and cannot be re-used.
 ///
 /// The resulting denom created is defined as
-/// <factory/{creatorAddress}/{subdenom}>. The resulting denom's admin is
+/// <{denom}>. The resulting denom's admin is
 /// originally set to be the creator, but this can be changed later. The token
 /// denom does not indicate the current admin.
 #[allow(clippy::derive_partial_eq_without_eq)]
@@ -218,9 +218,9 @@ pub struct QueryDenomsFromCreatorResponse {
 pub struct MsgCreateDenom {
     #[prost(string, tag = "1")]
     pub sender: ::prost::alloc::string::String,
-    /// subdenom can be up to 44 "alphanumeric" characters long.
+    /// denom can be up to 44 "alphanumeric" characters long.
     #[prost(string, tag = "2")]
-    pub subdenom: ::prost::alloc::string::String,
+    pub denom: ::prost::alloc::string::String,
 }
 /// MsgCreateDenomResponse is the return value of MsgCreateDenom
 /// It returns the full string of the newly created denom

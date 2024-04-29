@@ -14,6 +14,10 @@ Generate code for `mintcash-rust`, a proto library for interacting with the Mint
 ```bash
 cargo run --bin mintcash-rust-generator
 ```
+> Note: If you have trouble in running above command, you have to install cmake and buf: 
+```bash
+brew install cmake bufbuild/buf/buf
+```
 
 You can now update `MintcashMsg` (`CustomMsg`) and `MintcashQuery` (`CustomQuery`) in `mintcash-bindings`.
 
